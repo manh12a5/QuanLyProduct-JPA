@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 <head>
     <meta charset="UTF-8">
@@ -9,39 +10,54 @@
     <head th:replace="/layout :: head"></head>
 <body>
 
-<h1 style="text-align: center; color: red">List Products</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/products">Products</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/products">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products/sumPrice">Sum Price</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products/top5PriceMax">Top 5 Price</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products/top5ProductNewest">Top 5 New Product</a>
+                </li>
+            </ul>
+            <form class="d-flex" action="/products/search" method="post">
+                <input name="name" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
 
-<!--Tìm kiếm tên sản phẩm-->
-<form action="/products" method="post">
-    <input style="width: 300px" name="name" type="text" placeholder=" Input name search "/>
-    <input style="width: 100px" type="submit" value="Search"/>
-</form>
+<span style="color: red" th:if="${sumPrice}" th:text="'Tổng tiền là:'+ ${sumPrice} + '$'"></span>
 
-<!--Tìm kiếm Category-->
-<form action="/products" th:method="post">
-    <select th:name="id">
-        <th:block th:each="c:${categories}">
-            <option th:value="${c.id}" th:text="${c.name}"></option>
-        </th:block>
-    </select>
-    <input type="submit" value="Search">
-</form>
+<!--&lt;!&ndash;Tìm kiếm Category&ndash;&gt;-->
+<!--<div>-->
+<!--    <form action="/products" th:method="post">-->
+<!--        <select th:name="id">-->
+<!--            <th:block th:each="c:${categories}">-->
+<!--                <option th:value="${c.id}" th:text="${c.name}"></option>-->
+<!--            </th:block>-->
+<!--        </select>-->
+<!--        <input type="submit" value="Search">-->
+<!--    </form>-->
+<!--</div>-->
 
-<div>
-    <form action="/products/create">
-        <input type="submit" value="Add new product">
-    </form>
-    <form action="/products/top5PriceMax">
-        <button>Top 5 Price</button>
-    </form>
-    <form action="/products/top5ProductNewest">
-        <button>Top 5 Newest</button>
-    </form>
-    <form action="/products/sumPrice">
-        <button>Sum Price</button>
-    </form>
-    <span style="color: red" th:if="${sumPrice}" th:text="${sumPrice}+'$'"></span>
-</div>
+<h1 style="text-align: center; color: red">List Product</h1>
+
+<a href="/products/create">
+    <button type="button" class="btn btn-primary">Add new Product</button>
+</a> <br>
 
 <table id="customers">
     <tr>

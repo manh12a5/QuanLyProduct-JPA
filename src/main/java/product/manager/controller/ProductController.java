@@ -87,12 +87,12 @@ public class ProductController {
     }
 
     //SearchNameProduct
-    @PostMapping("/searchNameProduct")
+    @PostMapping("/search")
     public ModelAndView showSearchNameProduct(@RequestParam String name) {
         ModelAndView modelAndView = new ModelAndView("list");
         String nameProduct = "%" + name + "%";
-        productService.findByName(nameProduct);
-        modelAndView.addObject("product", nameProduct);
+        List<Product> productList = productService.findByName(nameProduct);
+        modelAndView.addObject("products", productList);
         return modelAndView;
     }
 
@@ -101,7 +101,7 @@ public class ProductController {
     public ModelAndView showSearchCategory(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("list");
         List<Product> productList = productService.findByCategoryName(id);
-        modelAndView.addObject("product", productList);
+        modelAndView.addObject("products", productList);
         return modelAndView;
     }
 
