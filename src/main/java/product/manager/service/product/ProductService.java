@@ -52,7 +52,7 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> top5ProductPriceMax() {
-        return productRepository.findTop5ByOrderByPriceDesc(5);
+        return productRepository.findTop5ByOrderByPriceDesc();
     }
 
     @Override

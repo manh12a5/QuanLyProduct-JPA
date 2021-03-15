@@ -23,7 +23,7 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 //    List<Product> findTop5ByOrderByDatetimeDesc(int number);
 
     //Top5 price max
-    List<Product> findTop5ByOrderByPriceDesc(int number);
+    List<Product> findTop5ByOrderByPriceDesc();
 
 //    @Query(value = "select * from product order by price desc limit ?", nativeQuery = true)
 //    List<Product> findTop5ByOrderByPriceDesc(int number);
